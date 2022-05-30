@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/pjh94/rinkeby_test#readme",
   "dependencies": {
+    "dotenv": "^16.0.1",
     "truffle-hdwallet-provider": "^1.0.17"
   }
 }
