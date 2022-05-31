@@ -6,6 +6,7 @@ const getWeb3 = () =>
     window.addEventListener("load", async () => {
       // Modern dapp browsers...
       if (window.ethereum) {
+        console.log("1");
         const web3 = new Web3(window.ethereum);
         try {
           // Request account access if needed
@@ -25,6 +26,7 @@ const getWeb3 = () =>
       }
       // Fallback to localhost; use dev console port by default...
       else {
+        console.log("2");
         const provider = new Web3.providers.HttpProvider(
           "http://127.0.0.1:8545"
         );

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SimpleStorageContract from "./contracts/SimpleStorage.json";
+import Tickets from "./contracts/Tickets.json";
 import getWeb3 from "./getWeb3";
 
 import "./App.css";
@@ -17,10 +17,12 @@ class App extends Component {
 
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
-      const deployedNetwork = SimpleStorageContract.networks[networkId];
+
+      console.log(networkId);
+      const deployedNetwork = Tickets.networks[networkId];
       const instance = new web3.eth.Contract(
-        SimpleStorageContract.abi,
-        deployedNetwork && deployedNetwork.address,
+        Tickets.abi,
+        deployedNetwork && deployedNetwork.address
       );
 
       // Set web3, accounts, and contract to the state, and then proceed with an
@@ -29,7 +31,7 @@ class App extends Component {
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
-        `Failed to load web3, accounts, or contract. Check console for details.`,
+        `Failed to load web3, accounts, or contract. Check console for details.`
       );
       console.error(error);
     }
@@ -38,8 +40,13 @@ class App extends Component {
   runExample = async () => {
     const { accounts, contract } = this.state;
 
+    console.log(accounts);
+    console.log(contract);
+
+    const a = await contract.methods.buyTicket(1);
+    console.log(a);
     // Stores a given value, 5 by default.
-    await contract.methods.set(5).send({ from: accounts[0] });
+    // await contract.methods.set(5).send({ from: accounts[0] });
 
     // Get the value from the contract to prove it worked.
     const response = await contract.methods.get().call();
